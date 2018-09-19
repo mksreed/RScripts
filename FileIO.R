@@ -27,6 +27,16 @@ install.packages("xlsx")
 library(xlsx)
 library(XML)
 fileUrl <- "http://www.w3schools.com/xml/simple.xml"
+download.file(fileUrl, destfile = "./data/simple.xml")
+list.files("./data")
+doc <- xmlTreeParse("simple.xml",useInternal=TRUE)
+rootNode <- xmlRoot(doc)
+rootNode[[1]]
+rootNode[[1]][[1]]
+xmlSApply(rootNode,xmlValue)
+xpathSApply(rootNode,"//food",xmlValue)
+xpathSApply(rootNode,"//name",xmlValue)
+#---------------------
 doc <- xmlTreeParse("catalog.xml",useInternal=TRUE)
 rootNode <- xmlRoot(doc)
 xmlName(rootNode)
@@ -51,3 +61,29 @@ xmlSize(xmltop[[1]]) #number of nodes in each child
 xmlSApply(xmltop[[1]], xmlName) #name(s)
 xmlSApply(xmltop[[1]], xmlAttrs) #attribute(s)
 xmlSApply(xmltop[[1]], xmlSize) #size
+##############################
+library(jsonlite)
+#--------------
+fileUrl <- "https://api.github.com/users/jtleek/repos"
+download.file(fileUrl, destfile = "./data/sample.json")
+list.files("./data")
+jsonData<-fromJSON("./data/sample.json")
+names(jsonData)
+jsonData$id
+#---------------
+jsonData<-fromJSON("sample1.json")
+names(jsonData)
+names(jsonData$quiz)
+names(jsonData$quiz$maths)
+names(jsonData$quiz$maths$q1)
+df<-fromJSON(jsonData)
+#-------
+js<-toJSON(iris)
+js
+js<-toJSON(iris,pretty=TRUE)
+js
+iris2<-fromJSON(js)
+head(iris2)
+#####################################
+k={print(10);5}
+print(k)
