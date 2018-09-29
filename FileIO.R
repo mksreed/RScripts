@@ -12,6 +12,12 @@ list.files("./data") # or list.files() or list.files(wd)
 dateDownloaded <- date()
 dateDownloaded
 #######################
+# Read from WEB pages.
+con<-url("https://home.allstate.com","r")
+xf<-readLines(con)
+head(xf)
+tail(xf)
+#######################
 #Example: Baltimore camera data
 cameraData <- read.table("./data/cameras.csv", sep = ",", header = TRUE)
 cameraData <- read.csv("./data/cameras.csv") # same as previous line.
@@ -44,6 +50,14 @@ rootNode[[1]]
 rootNode[[1]][[1]]
 xmlSApply(rootNode,xmlValue)
 xpathSApply(rootNode,"//country",xmlValue)
+#---------------------
+doc <- xmlTreeParse("intest1.xml",useInternal=TRUE)
+rootNode <- xmlRoot(doc)
+xmlName(rootNode)
+rootNode[[1]]
+rootNode[[1]][[1]]
+xmlSApply(rootNode,xmlValue)
+xpathSApply(rootNode,"//PartyId",xmlValue)
 ########################
 xmlfile=xmlParse("catalog.xml")
 class(xmlfile) #"XMLInternalDocument" "XMLAbstractDocument"
