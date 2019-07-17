@@ -1,0 +1,11 @@
+x<-seq(1,100,10)
+y<-seq(1,100,20)
+#vector
+n<-c("a","b","c","d")
+y<-c(1,21,41,61,81)
+class(x)
+str(x)
+z<-100
+getwd()
+setwd("C:/Users/msreed/Documents/Personal/RSpace")
+getwd()

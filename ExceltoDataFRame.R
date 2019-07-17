@@ -1,3 +1,20 @@
+##gets an aggregate plot from a clipboard
+#tt<-readClipboard()
+tt0<-gsub("\t"," ",tt)
+for (i in 1:8) { tt0<-gsub("  "," ",tt0)}
+tt00<-strsplit(tt0," ")
+lapply(tt00, function(x) paste(as.Date(x[1]),x[2],as.numeric(x[3])))
+df<-setNames(do.call(rbind.data.frame,tt00),c("dt","tm", "docs"))
+str(df)
+df1<-data.frame(as.numeric(as.character(df$docs)),as.Date(as.character(df$dt)))
+colnames(df1)=c("docs","dt")
+hist(df1$docs,30)
+plot(df1$docs,type="l")
+df1$yyyymm=format(df1$dt,"%Y-%m")
+ag=aggregate(x=df1$docs,by=list(yyyymm=df1$yyyymm),FUN=sum)
+barplot(df1$docs,names.arg=df1$dt,xlab="Date",ylab="ABT contracts")
+barplot(ag$x,names.arg=ag$yyyymm,xlab="months",ylab="ABT contracts")
+#############################################################
 pt0
   [4] "12/28/2018 3:01\t246"  "12/27/2018 3:06\t181"  "12/25/2018 3:07\t251" 
   [7] "12/24/2018 3:02\t7"    "12/22/2018 3:03\t277"  "12/21/2018 3:08\t163" 
@@ -5,7 +22,7 @@ pt0
 pt0<-gsub("\t"," ",pt)
 pt00=strsplit(pt0," ")
 
-tt<-readClipboard()
+#tt<-readClipboard()
 tt0<-gsub("\t"," ",tt)
 tt00<-strsplit(tt0," ")
 tt00[[1]][1]
