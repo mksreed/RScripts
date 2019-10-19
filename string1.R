@@ -19,3 +19,5 @@ df2<-as.data.frame(tapply(df1$docs,df1$Month_Yr,sum))
 str(df2)
 colnames(df2)=c("x")
 str_split(df2$x," ")
+################
+gsub("[()]","",xx)   # square bracket to treat as characters
